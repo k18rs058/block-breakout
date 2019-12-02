@@ -45,11 +45,6 @@ var ncmbController = {
        .catch(function(err){
             console.log(err);
         });
-        Score.greaterThan("score", score)
-    .count()    // 件数を結果に含める
-    .fetchAll()
-    .then(function(scores){
-        // countの結果は、取得データscoresのcountプロパティに含まれる
 },
 
 //ユーザー登録
@@ -74,8 +69,20 @@ createUser: function() {
             // userName が被った場合はエラーが返る
             alert("ユーザー登録に失敗しました");
         });
-},
-
+ },
+  uuid: function() {
+    var uuid = "", i, random;
+    for (i = 0; i < 32; i++) {
+      random = Math.random() * 16 | 0;
+      if (i == 8 || i == 12 || i == 16 || i == 20) {
+        uuid += "-"
+      }
+      uuid += (i == 12 ? 4 :
+        (i == 16 ? (random & 3 | 8) :
+        random)).toString(16);
+    }
+    return uuid;
+  },
   init: function(screenSize) {
         var self = this;
         self.ncmb = new NCMB(self.APPLICATION_KEY, self.CLIENT_KEY);    // mobile backendの初期化
