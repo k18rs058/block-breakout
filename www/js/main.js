@@ -40,14 +40,14 @@ var BB = {
     isMouseDown: false,
     
     // Create blocks map
-    setMap: function() {
+    setMap1: function() {
         var blockMap = [
             [null,      null,       null,       null,       null,       'blue',     null,       null,       null,       null],
             [null,      null,       null,       null,       'red',      'red',      'blue',     null,       null,       null],
-            [null,      null,       null,       'red',      'red',      null,       null,       'blue',     null,       null],
-            [null,      null,       'red',      'red',      null,       null,       null,       null,       'blue',     null],    
-            [null,      'red',      'red',      null,       null,       'gold',     null,       null,       'silver',   'silver'],    
-            [null,      null,       'red',      'red',       null,       null,       null,       'silver',   'silver',   null],    
+            [null,      null,       null,       'red',      'red',      null,       'blue',       'blue',     null,       null],
+            [null,      null,       'red',      'red',      null,       'green',       null,       'blue',       'blue',     null],    
+            [null,      'red',      'red',      null,       'green',       'gold',     'green',       null,       'silver',   'silver'],    
+            [null,      null,       'red',      'red',       null,       'green',       null,       'silver',   'silver',   null],    
             [null,      null,       null,       'red',      'red',       null,       'silver',   'silver',   null,       null],    
             [null,      null,       null,       null,       'silver',   'silver',   'silver',   null,       null,       null],
             [null,      null,       null,       null,       null,       'silver',   null,       null,       null,       null]
@@ -80,6 +80,9 @@ var BB = {
             case "gold":
                 var point = SETTINGS_POINT_GOLD;
                 break;    
+            case "green":
+                var point = SETTINGS_POINT;
+                break;
             default:
                 var point = SETTINGS_POINT;
                 color = "red";
@@ -203,7 +206,7 @@ var BB = {
         
         BB.balls = [];
         BB.blocks = [];
-        BB.setMap();
+        BB.setMap1();
         for (var i = 0; i < SETTINGS_BALL_NUM; i++) {
             BB.addBall();
         }
@@ -285,7 +288,7 @@ var BB = {
 
 function init() {
     // Accelerometer
-    /*
+    
     if (typeof navigator.accelerometer !== 'undefined' && !accelerationWatch) {
         accelerationWatch = navigator.accelerometer.watchAcceleration(
             BB.updateAcceleration, 
@@ -295,7 +298,7 @@ function init() {
             {frequency: SETTINGS_ACCELEROMETER_RELOAD_FREQ}
         );
     }
-    */
+    
     BB.screenSize = setBound();
  
     BB.renderer = (getUa() === "Android") ? new PIXI.CanvasRenderer(BB.screenSize.width, BB.screenSize.height) : new PIXI.autoDetectRenderer(BB.screenSize.width, BB.screenSize.height),
