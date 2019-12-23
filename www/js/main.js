@@ -40,7 +40,7 @@ var BB = {
     isMouseDown: false,
     
     // Create blocks map
-    setMap1: function() {
+    setMap: function() {
         var blockMap = [
             [null,      null,       null,       null,       null,       'blue',     null,       null,       null,       null],
             [null,      null,       null,       null,       'red',      'red',      'blue',     null,       null,       null],
@@ -71,6 +71,7 @@ var BB = {
     addBlock: function(x, y, color) {
         switch (color) {
             case "red":
+            case "green":
             case "blue":
                 var point = SETTINGS_POINT;
                 break;
@@ -80,9 +81,7 @@ var BB = {
             case "gold":
                 var point = SETTINGS_POINT_GOLD;
                 break;    
-            case "green":
-                var point = SETTINGS_POINT;
-                break;
+
             default:
                 var point = SETTINGS_POINT;
                 color = "red";
@@ -206,7 +205,7 @@ var BB = {
         
         BB.balls = [];
         BB.blocks = [];
-        BB.setMap1();
+        BB.setMap();
         for (var i = 0; i < SETTINGS_BALL_NUM; i++) {
             BB.addBall();
         }
@@ -288,7 +287,7 @@ var BB = {
 
 function init() {
     // Accelerometer
-    
+    /*
     if (typeof navigator.accelerometer !== 'undefined' && !accelerationWatch) {
         accelerationWatch = navigator.accelerometer.watchAcceleration(
             BB.updateAcceleration, 
@@ -298,7 +297,7 @@ function init() {
             {frequency: SETTINGS_ACCELEROMETER_RELOAD_FREQ}
         );
     }
-    
+    */
     BB.screenSize = setBound();
  
     BB.renderer = (getUa() === "Android") ? new PIXI.CanvasRenderer(BB.screenSize.width, BB.screenSize.height) : new PIXI.autoDetectRenderer(BB.screenSize.width, BB.screenSize.height),
